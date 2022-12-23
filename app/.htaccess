@@ -1,0 +1,2 @@
+#this file protect the app folder so that it makes the access to it denied
+Options -Indexes
