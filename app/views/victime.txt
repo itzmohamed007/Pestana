@@ -1,0 +1,1 @@
+<h1><?php echo 'welcom back Mr.' . $data['name'] ?></h1>
