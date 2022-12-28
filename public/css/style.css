@@ -1,0 +1,143 @@
+body {
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+  .masthead {
+    padding: 10rem 0;
+  }
+  header.masthead {
+    padding-top: 12rem;
+    background: linear-gradient(to bottom,rgba(92, 77, 66, 0.8) 0%,rgba(92, 77, 66, 0.8) 100%), 
+    url('../img/bg-masthead.jpg') center / cover;
+  }
+  header h1 {
+    font-size: 3.5rem;
+    color: white;
+  }
+  hr.divider {
+    border-top: 0; /*this line of code remove the initiale decoration of a hr in bootstrap*/
+    height: 0.2rem;
+    max-width: 3.25rem;
+    margin: 1.5rem auto;
+    background-color: #f4623a;
+    opacity: 1;
+  }
+  form hr {
+    border-top: 0;
+    height: 0.2rem;
+    width: 10rem;
+    margin: 1.5rem auto;
+    background-color: #ffffff;
+    opacity: 1;
+    border-radius: 20px;
+  }
+  header p {
+    color: white;
+    font-size: 1.5rem;
+  }
+  header .btn-primary {
+    color: #fff;
+    background-color: #f4623a;
+    padding: 1.25rem 2.25rem;
+  }
+  header .btn-primary:hover {
+    background-color: #d84f2a;
+    transition: .5s;
+  }
+  .page-section {
+    padding: 11rem 0;
+    background-color: #f4623a;
+  }
+  .page-section-services {
+    padding: 10rem 0;
+    background-color: #ffffff;
+    color: lavender;
+  }
+  .page-section-chambres .container .row {
+    gap: 0;
+  }
+  .page-section-welcome {
+    padding-top: 10rem;
+  }
+  .page-section-welcome h1 {
+    font-size: 3rem;
+  }
+  .return {
+    color: #fff;
+    background-color: hwb(121 5% 54%);
+    padding: 1.25rem 2.25rem;
+  }
+  .return a {
+      color: inherit !important;
+      text-decoration: none !important;
+  }
+  .return:hover {
+    background-color: hwb(121 3% 65%);
+    color: white;
+    transition: .5s;
+  }
+  .page-section-chambres .container .g-0 {
+      --bs-gutter-y: 0;
+  }
+  .page-section .about-us {
+    font-size: 1rem;
+  }
+  .page-section-reservation {
+    padding: 10rem 0;
+  }
+  .page-section-contact {
+    padding: 4rem 0;
+  }
+  .page-section-contact .btn-primary {
+    color: #fff;
+    border: none;
+    background-color: #f4623a;
+    padding: 1.10rem 2.25rem;
+    font-size: 1rem;
+  }
+  .page-section-contact .btn-primary:hover {
+    background-color: #d84f2a;
+    transition: .5s;
+  }
+  hr.divider-light  {
+    border-top: 0;
+    height: 0.2rem;
+    max-width: 3.25rem;
+    margin: 1.5rem auto;
+    background-color: #ffffff;
+    opacity: 1;
+  }
+  @media (max-width: 768px) {
+    .text-sm {
+      font-size: 0.875rem;
+    }
+  }
+  /* dashboard style */
+  .dashboard{  
+    background-color:#B3E5FC;
+  }
+  .card-1{
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    background-color: #fff;
+  }
+  .dashboard .container .icons i {
+    cursor: pointer;
+  }
+  .dashboard .container .icons a {
+    color: black;
+  }
+  /* inputs style */
+  .form-wrapper form input[type="file"] {
+    padding: 0%;
+  }
+  .form-wrapper form input::-webkit-file-upload-button {
+    /* padding: 1.5rem 2rem; */
+    background-color: #f4623a;
+    color: #fff;
+    border: none;
+  }
+  .page-section-operations .add-tour a{
+    color: white;
+    text-decoration: none;
+  }
