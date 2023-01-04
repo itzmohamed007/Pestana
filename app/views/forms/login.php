@@ -37,7 +37,7 @@
                         </div>
                         <!-- Return Button-->
                         <div class="d-grid pt-3">
-                            <button class="btn return rounded-5 btn-xl" type="submit"><a href="acceuil.php">Revenir</a></button>
+                            <button class="btn return rounded-5 btn-xl" type="submit"><a href="../">Revenir</a></button>
                         </div>
                     </form>
                 </div>

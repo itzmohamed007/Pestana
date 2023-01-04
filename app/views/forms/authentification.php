@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?=$_SERVER["HTTP_HOST"]?>/pestana/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>inscription</title>
 </head>
 <body>
@@ -49,9 +49,9 @@
                     <div>
                         <!-- Return Button-->
                         <div class="d-grid pt-3">
-                        <button class="btn return rounded-5 btn-xl" type="submit"><a href="acceuil.php">Revenir</a></button>
+                        <button class="btn return rounded-5 btn-xl" type="submit"><a href="../">Revenir</a></button>
                         </div>
-                        <p class="mt-2"><a href="login.php">already have an account ?</a></p>
+                        <p class="mt-2"><a href="login">already have an account ?</a></p>
                     </div>
                 </div>
             </div>

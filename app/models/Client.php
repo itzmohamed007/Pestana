@@ -7,7 +7,6 @@ class Client {
     private $phone;
 
     public function signUp($postName, $postEmail, $postPassword, $postPhone){
-
         $this->name = $postName;
         $this->email = $postEmail;
         $this->password = $postPassword;
@@ -39,5 +38,13 @@ class Client {
         $stmt->close();
 
         return $storedPassword;
+    }
+
+    public function reservation(){
+        $object = new Database;
+        $connection = $object->connection();
+
+        $stmt = $connection->prepare("");
+        
     }
 }

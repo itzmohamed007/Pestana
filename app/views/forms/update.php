@@ -49,7 +49,7 @@
                 <div>
                     <!-- Return Button-->
                     <div class="d-grid pt-3">
-                        <button class="btn return rounded-5 btn-xl" type="submit"><a href="dashboard">Revenir</a></button>
+                        <button class="btn return rounded-5 btn-xl" type="submit"><a href="../dashboard">Revenir</a></button>
                     </div>
                 </div>
             </div>
@@ -57,6 +57,6 @@
     </div>
     </section>
 
-    <script src="../js/main.js"></script>  
+    <script src="../../js/main.js"></script>  
 </body>
 </html>

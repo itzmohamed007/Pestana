@@ -61,16 +61,50 @@
         $result = $object->add($oldLocation, $newLocation, $type, $type_suite, $numero);
 
         if($result == true){
-          header('location: home');
+          header('location: dashboard');
         } else {
           echo 'error404';
         }
       }
     }
 
-    public function update(){
+    public function update($id){
       $this->view('forms/update');
+
+      if(isset($_POST['submit'])){
+        $image_name = $_FILES["image"]["name"];
+        $oldLocation = $_FILES["image"]["tmp_name"];
+        $newLocation = "added_imgs/" . $image_name;  
+        $type = $_POST['type'];
+        $type_suite = $_POST['suite_type']; 
+        $numero = $_POST['numero'];
+
+        $object = $this->model('Chambre');
+        $result = $object->update($id, $oldLocation, $newLocation, $type, $type_suite, $numero);
+
+        if($result == true){
+          header('location: ../dashboard');
+        } else {
+          echo 'error404';
+        }
+      }
     }
+
+
+    public function delete($id){
+      $object = $this->model('Chambre');
+      $result = $object->delete($id);
+
+      if($result == true){
+        header('location: ../dashboard');
+      } else{
+        echo 'error';
+      }
+    }
+
+
+
+
     public function home(){
       $this->view('pages/home');
     }

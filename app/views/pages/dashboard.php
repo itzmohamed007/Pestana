@@ -124,7 +124,7 @@
                     <td>
                       <div class="p-2 icons d-flex justify-content-center gap-5">
                         <a href="update/' . $row['id'] . '"><i class="fa fa-pen-to-square fa-2x"></i></a>
-                        <i class="fa fa-trash fa-2x"></i>
+                        <a href="delete/' . $row['id'] . '"><i class="fa fa-trash fa-2x"></i></a>
                       </div>
                     </td>
                   </tr>

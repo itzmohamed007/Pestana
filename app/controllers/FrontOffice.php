@@ -1,12 +1,11 @@
 <?php
   class FrontOffice extends Controller {
-    public function __construct(){
-      
-    }
     // UI pages
     public function home(){
       $this->view('pages/home');
     }
+
+    
     public function chambres(){
       $this->view('pages/chambres');
     }
@@ -50,7 +49,7 @@
         if(password_verify($Upass, $storedPassword)){
           session_start();
           $_SESSION["client"] = $Uemail;
-          header('location: home');
+          header('location: frontOffice/home');
         } else {
           echo 'error';
         }
@@ -58,9 +57,40 @@
     }
 
     
+    // public function reservation($querry){
     public function reservation(){
+      // checking is the admin is loged in
+      $object = $this->model('Client');
+      session_start();
+      if(empty($_SESSION["client"])){
+        header('location: authentification'); 
+      }
+
       $this->view('forms/reservation');
+
+      if(isset($_POST['search'])){
+        $room_type = $_POST['room_type'];
+        $suite_type = $_POST['suite_type'];
+        $date_de = $_POST['date_de'];
+        $date_a = $_POST['date_a'];
+
+        $object = $this->model('Chambre');
+        $querry = $object->reservationRooms($date_de, $date_a, $room_type, $suite_type);
+
+        if($querry == false){
+          echo "error";
+        }
+      }
     }
+
+    public function rooms(){
+      $this->view('pages/rooms');
+    }
+
+    public function guests(){
+      $this->view('forms/guests');
+    }
+
     public function creation(){
       $this->view('forms/create');
     }
