@@ -74,19 +74,45 @@
       return false;
     }
   }
-  
-  // reservation functions
-  public function reservationRooms($date_de, $date_a, $room_type, $suite_type){
+
+  // search functions
+  public function roomsSearch($date_de, $date_a, $room_type, $suite_type){
     $object = new Database;
     $connection = $object->connection();
 
-    $stmt = $connection->prepare("SELECT * FROM room WHERE ? BETWEEN date_debut AND date_fin");
-    
-    $stmt->bind_param('ss', $date_de, $date_a);
-    $stmt->execute();
-    $stmt->bind_result($validRooms);
-    $stmt->fetch();
-    $stmt->close();
+    if($suite_type == 'null'){
+      $stmt = $connection->prepare("SELECT room.*
+      FROM room
+      INNER JOIN reservation 
+      ON room.id = reservation.id_room
+      WHERE (reservation.date_debut NOT BETWEEN '2023-01-06' AND '2023-01-08')
+      AND (reservation.date_fin NOT BETWEEN '2023-01-06' AND '2023-01-08')
+      AND (room.type = $room_type)
+      AND (room.suite_type IS NULL)
+      ");
+
+      $stmt->bind_param('sss', $date_de, $date_a, $suite_type);
+      $stmt->execute();
+      $stmt->bind_result($validRooms);
+      $stmt->fetch();
+      $stmt->close();
+    } else {
+      $stmt = $connection->prepare("SELECT room.*
+      FROM room
+      INNER JOIN reservation 
+      ON room.id = reservation.id_room
+      WHERE (reservation.date_debut NOT BETWEEN '2023-01-06' AND '2023-01-08')
+      AND (reservation.date_fin NOT BETWEEN '2023-01-06' AND '2023-01-08')
+      AND (room.type = $room_type)
+      AND (room.suite_type IS NULL)
+      ");
+      
+      $stmt->bind_param('ss', $date_de, $date_a);
+      $stmt->execute();
+      $stmt->bind_result($validRooms);
+      $stmt->fetch();
+      $stmt->close();
+    }
 
     if($validRooms){
       return $validRooms;

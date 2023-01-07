@@ -17,33 +17,41 @@
             <div class="d-flex flex-column align-items-center">
                 <h1 class="mb-4">Nos chambres:</h1>
                 <h5 class="fw-light">Choisissez la chambre qui vous plais selon votre gôuts!</h5>
-                <hr class="divider-dark mb-4 rounded-5 mb-5">
+                <hr class="divider-dark mb-4 rounded-5">
             </div>
             <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 pb-5">
-                <img class="rounded" src="../imgs/chambre1.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
-                <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <img class="rounded" src="../imgs/chambre2.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
-                <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <img class="rounded" src="../imgs/chambre3.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
-                <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <img class="rounded" src="../imgs/chambre4.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
-                <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <img class="rounded" src="../imgs/chambre5.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
-                <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <img class="rounded" src="../imgs/chambre6.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
-                <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
-            </div>
+                <!-- reserved rooms section -->
+                <div class="text-center mb-4 text-secondary  mt-5">
+                    <h3>Reserved rooms section:</h3>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 pb-5">
+                    <img class="rounded" src="../imgs/chambre1.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
+                    <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <img class="rounded" src="../imgs/chambre2.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
+                    <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <img class="rounded" src="../imgs/chambre3.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
+                    <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
+                </div>
+                <!-- unreserved rooms section -->
+                <div class="text-center mb-4 text-secondary  mt-5">
+                        <h3>Unreserved rooms section:</h3>
+                    </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <img class="rounded" src="../imgs/chambre4.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
+                    <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <img class="rounded" src="../imgs/chambre5.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
+                    <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <img class="rounded" src="../imgs/chambre6.jpg" alt="image d'une chambre du hotel Pestana" width="356px" height="250px">
+                    <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
+                </div>
             </div>
         </div>
     </section>

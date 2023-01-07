@@ -4,11 +4,6 @@
     public function home(){
       $this->view('pages/home');
     }
-
-    
-    public function chambres(){
-      $this->view('pages/chambres');
-    }
     
     // FORMS pages
     public function authentification(){
@@ -49,7 +44,7 @@
         if(password_verify($Upass, $storedPassword)){
           session_start();
           $_SESSION["client"] = $Uemail;
-          header('location: frontOffice/home');
+          header('location: reservation');
         } else {
           echo 'error';
         }
@@ -67,24 +62,27 @@
       }
 
       $this->view('forms/reservation');
+    }
 
+    public function rooms(){
       if(isset($_POST['search'])){
         $room_type = $_POST['room_type'];
         $suite_type = $_POST['suite_type'];
         $date_de = $_POST['date_de'];
         $date_a = $_POST['date_a'];
 
+        if($suite_type == ''){
+          $suite_type = 'null';
+        }
+
         $object = $this->model('Chambre');
-        $querry = $object->reservationRooms($date_de, $date_a, $room_type, $suite_type);
+        $querry = $object->roomsSearch($date_de, $date_a, $room_type, $suite_type);
 
         if($querry == false){
           echo "error";
         }
+        $this->view('pages/rooms');
       }
-    }
-
-    public function rooms(){
-      $this->view('pages/rooms');
     }
 
     public function guests(){
