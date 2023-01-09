@@ -28,16 +28,16 @@ class Client {
         $object = new Database;
         $connection = $object->connection();
 
-        $stmt = $connection->prepare("SELECT password FROM Client WHERE email = ?");
+        $stmt = $connection->prepare("SELECT * FROM Client WHERE email = ?");
 
         // Bind the parameters to the prepared statement
         $stmt->bind_param('s', $email);
         $stmt->execute();
-        $stmt->bind_result($storedPassword);
-        $stmt->fetch();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
         $stmt->close();
 
-        return $storedPassword;
+        return $row;
     }
 
     public function reservation(){

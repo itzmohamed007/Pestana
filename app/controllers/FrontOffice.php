@@ -33,17 +33,18 @@
     
     public function login(){
       $this->view('forms/login');
-      
+
       if(isset($_POST['submit'])){
         $Uemail = $_POST['email'];
         $Upass = $_POST['password'];
         
         $object = $this->model('Client');
-        $storedPassword = $object->signIn($Uemail);
+        $clientData = $object->signIn($Uemail);
+        $storedPassword = $clientData['password'];
         
         if(password_verify($Upass, $storedPassword)){
           session_start();
-          $_SESSION["client"] = $Uemail;
+          $_SESSION["client"] = $clientData['id'];
           header('location: reservation');
         } else {
           echo 'error';
@@ -54,35 +55,46 @@
     
     // public function reservation($querry){
     public function reservation(){
-      // checking is the admin is loged in
+      // checking is the client is loged in
       $object = $this->model('Client');
       session_start();
       if(empty($_SESSION["client"])){
         header('location: authentification'); 
       }
 
-      $this->view('forms/reservation');
+      $this->view('forms/reservation');  
     }
 
     public function rooms(){
-      if(isset($_POST['search'])){
-        $room_type = $_POST['room_type'];
-        $suite_type = $_POST['suite_type'];
-        $date_de = $_POST['date_de'];
-        $date_a = $_POST['date_a'];
+      session_start();
+      // part 1: getting reservation informations
+      $date_de = $_POST['date_de'];
+      $date_a = $_POST['date_a'];
+      $client_id = $_SESSION["client"];
 
-        if($suite_type == ''){
-          $suite_type = 'null';
-        }
+      $object = $this->model('Chambre');
+      $querry = $object->booking($date_de, $date_a, $client_id);
 
-        $object = $this->model('Chambre');
-        $querry = $object->roomsSearch($date_de, $date_a, $room_type, $suite_type);
-
-        if($querry == false){
-          echo "error";
-        }
-        $this->view('pages/rooms');
+      if(!$querry){
+        die('reservation data error');
       }
+
+      // part 2: displaying rooms
+      $room_type = $_POST['room_type'];
+      $suite_type = 'null';
+
+      if(isset($_POST['suite_type'])){
+        $suite_type = $_POST['suite_type'];
+      }
+
+      $object = $this->model('Chambre');
+      $rows = $object->roomsSearch($room_type, $suite_type);
+
+      if($rows == false){
+        echo "rooms data error";
+      }
+
+      $this->view('pages/rooms', $rows);
     }
 
     public function guests(){

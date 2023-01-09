@@ -17,7 +17,7 @@ chambreChoice.addEventListener('change', function() {
             <option value="Honeymoon">Honeymoon</option>
             <option value="Bridal">Bridal</option>
         </select>
-        <label for="type">type de suite</label>
+        <label for="suite_type">type de suite</label>
         `;
 
         suiteChoice.innerHTML = suite;

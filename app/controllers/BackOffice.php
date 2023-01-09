@@ -15,10 +15,10 @@
       if(isset($_POST['submit'])){
         $Uemail = $_POST['email'];
         $Upass = $_POST['password'];
-        
+
         $object = $this->model('Admin');
         $storedPassword = $object->signIn($Uemail);
-        
+
         if(password_verify($Upass, $storedPassword)){
           session_start();
           $_SESSION["admin"] = $Uemail;
@@ -29,7 +29,7 @@
         }
       }
     }
-    
+
     public function dashboard(){
       // checking is the admin is loged in
       $object = $this->model('Admin');

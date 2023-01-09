@@ -75,47 +75,55 @@
     }
   }
 
+  // reservation function
+  public function booking($date_de, $date_a, $clientId){
+    $object = new Database;
+    $connection = $object->connection();
+
+    $stmt = $connection->prepare("INSERT INTO `reservation` (`date_debut`, `date_fin`, `id_user`) 
+    VALUES (?, ?, ?)
+    ");
+    
+    $stmt->bind_param('ssi', $date_de, $date_a, $clientId);
+    $result = $stmt->execute();
+    $stmt->close();
+
+    return $result;
+  }
+
   // search functions
-  public function roomsSearch($date_de, $date_a, $room_type, $suite_type){
+  public function roomsSearch($room_type, $suite_type,){
     $object = new Database;
     $connection = $object->connection();
 
     if($suite_type == 'null'){
-      $stmt = $connection->prepare("SELECT room.*
-      FROM room
-      INNER JOIN reservation 
-      ON room.id = reservation.id_room
-      WHERE (reservation.date_debut NOT BETWEEN '2023-01-06' AND '2023-01-08')
-      AND (reservation.date_fin NOT BETWEEN '2023-01-06' AND '2023-01-08')
-      AND (room.type = $room_type)
-      AND (room.suite_type IS NULL)
+      $stmt = $connection->prepare("SELECT room.* FROM room 
+      LEFT JOIN reservation ON room.id != reservation.room_id
+      WHERE room.type = ? AND room.suite_type IS NULL
       ");
 
-      $stmt->bind_param('sss', $date_de, $date_a, $suite_type);
+      $stmt->bind_param('s', $room_type);
       $stmt->execute();
-      $stmt->bind_result($validRooms);
-      $stmt->fetch();
+      $result = $stmt->get_result();
+      $rows = $result->fetch_all(MYSQLI_ASSOC); 
+      // MYSQLI_ASSOC constant is used to make the functin fetch_all return an assossiative 
+      //array, it we do not include that constant, it will make the array return a normale array index with numbers
       $stmt->close();
     } else {
-      $stmt = $connection->prepare("SELECT room.*
-      FROM room
-      INNER JOIN reservation 
-      ON room.id = reservation.id_room
-      WHERE (reservation.date_debut NOT BETWEEN '2023-01-06' AND '2023-01-08')
-      AND (reservation.date_fin NOT BETWEEN '2023-01-06' AND '2023-01-08')
-      AND (room.type = $room_type)
-      AND (room.suite_type IS NULL)
+      $stmt = $connection->prepare("SELECT room.* FROM room 
+      LEFT JOIN reservation ON room.id != reservation.room_id
+      WHERE room.type = ? AND room.suite_type = ?
       ");
-      
-      $stmt->bind_param('ss', $date_de, $date_a);
+
+      $stmt->bind_param('ss', $room_type, $suite_type);
       $stmt->execute();
-      $stmt->bind_result($validRooms);
-      $stmt->fetch();
+      $result = $stmt->get_result();
+      $rows = $result->fetch_all(MYSQLI_ASSOC);
       $stmt->close();
     }
 
-    if($validRooms){
-      return $validRooms;
+    if (!empty($rows)) {
+      return $rows;
     } else {
       return false;
     }
