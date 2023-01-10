@@ -4,7 +4,6 @@
     public function connection(){
       // checking is the admin is loged in
       $object = $this->model('Admin');
-      session_start();
       if(!empty($_SESSION["admin"])){
         header('location: dashboard');
       }
@@ -20,7 +19,6 @@
         $storedPassword = $object->signIn($Uemail);
 
         if(password_verify($Upass, $storedPassword)){
-          session_start();
           $_SESSION["admin"] = $Uemail;
 
           header('location: dashboard');
@@ -33,7 +31,6 @@
     public function dashboard(){
       // checking is the admin is loged in
       $object = $this->model('Admin');
-      session_start();
       if(empty($_SESSION["admin"])){
         header('location: connection'); 
       }

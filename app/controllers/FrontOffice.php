@@ -21,7 +21,6 @@
         $querry = $object->signUp($Uname, $Uemail, $Upass, $Uphone);
 
         if($querry == true){
-          session_start();
           $_SESSION["client"] = $Uemail;
 
           header('location: login');
@@ -43,7 +42,6 @@
         $storedPassword = $clientData['password'];
         
         if(password_verify($Upass, $storedPassword)){
-          session_start();
           $_SESSION["client"] = $clientData['id'];
           header('location: reservation');
         } else {
@@ -57,7 +55,6 @@
     public function reservation(){
       // checking is the client is loged in
       $object = $this->model('Client');
-      session_start();
       if(empty($_SESSION["client"])){
         header('location: authentification'); 
       }
@@ -66,20 +63,27 @@
     }
 
     public function rooms(){
-      session_start();
-      // part 1: getting reservation informations
+      // step 1: getting reservation informations
       $date_de = $_POST['date_de'];
       $date_a = $_POST['date_a'];
-      $client_id = $_SESSION["client"];
+      // $client_id = $_SESSION["client"];
+
+      // putting reservation data into session
+      $reservationData = [
+        'date_debut' => $date_de,
+        'date_fin' => $date_a
+      ];
+
+      $_SESSION['data'] = $reservationData;
 
       $object = $this->model('Chambre');
-      $querry = $object->booking($date_de, $date_a, $client_id);
+      // $querry = $object->booking($date_de, $date_a, $client_id);
 
-      if(!$querry){
-        die('reservation data error');
-      }
+      // if(!$querry){
+      //   die('reservation data error');
+      // }
 
-      // part 2: displaying rooms
+      // step 2: displaying rooms
       $room_type = $_POST['room_type'];
       $suite_type = 'null';
 
@@ -87,7 +91,6 @@
         $suite_type = $_POST['suite_type'];
       }
 
-      $object = $this->model('Chambre');
       $rows = $object->roomsSearch($room_type, $suite_type);
 
       if($rows == false){
@@ -97,7 +100,14 @@
       $this->view('pages/rooms', $rows);
     }
 
-    public function guests(){
+    public function guests($id){
+      $date_de = $_SESSION['data']['date_debut'];
+      $date_a = $_SESSION['data']['date_fin'];
+      $clientId = $_SESSION['client'];
+
+      $object = $this->model('Chambre');
+      $result = $object->booking($id, $date_de, $date_a, $clientId);
+
       $this->view('forms/guests');
     }
 

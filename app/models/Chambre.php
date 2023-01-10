@@ -76,15 +76,15 @@
   }
 
   // reservation function
-  public function booking($date_de, $date_a, $clientId){
+  public function booking($room_id, $date_de, $date_a, $clientId){
     $object = new Database;
     $connection = $object->connection();
 
-    $stmt = $connection->prepare("INSERT INTO `reservation` (`date_debut`, `date_fin`, `id_user`) 
-    VALUES (?, ?, ?)
+    $stmt = $connection->prepare("INSERT INTO `reservation` (`room_id`, `date_debut`, `date_fin`, `id_user`) 
+    VALUES (?, ?, ?, ?)
     ");
-    
-    $stmt->bind_param('ssi', $date_de, $date_a, $clientId);
+
+    $stmt->bind_param('issi', $room_id, $date_de, $date_a, $clientId);
     $result = $stmt->execute();
     $stmt->close();
 
@@ -107,7 +107,7 @@
       $result = $stmt->get_result();
       $rows = $result->fetch_all(MYSQLI_ASSOC); 
       // MYSQLI_ASSOC constant is used to make the functin fetch_all return an assossiative 
-      //array, it we do not include that constant, it will make the array return a normale array index with numbers
+      // array, it we do not include that constant, it will make the array return a normale array index with numbers
       $stmt->close();
     } else {
       $stmt = $connection->prepare("SELECT room.* FROM room 
@@ -127,5 +127,5 @@
     } else {
       return false;
     }
-  }     
+  }  
 }

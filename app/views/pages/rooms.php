@@ -25,7 +25,7 @@
                         echo '
                         <div class="col-lg-4 col-md-6 col-sm-12 pb-5">
                             <img class="rounded" src="../' . $row['image'] . '" alt="image d`une chambre du hotel Pestana" width="356px" height="250px">
-                            <button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button>
+                            <a href="guests/' . $row['id'] . '"><button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button></a>
                         </div>
                         ';
                     }
