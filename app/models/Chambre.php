@@ -98,8 +98,8 @@
 
     if($suite_type == 'null'){
       $stmt = $connection->prepare("SELECT room.* FROM room 
-      LEFT JOIN reservation ON room.id != reservation.room_id
-      WHERE room.type = ? AND room.suite_type IS NULL
+      LEFT JOIN reservation ON room.id = reservation.room_id
+      WHERE room.type = ? AND room.suite_type IS NULL AND reservation.room_id IS NULL
       ");
 
       $stmt->bind_param('s', $room_type);
@@ -111,8 +111,8 @@
       $stmt->close();
     } else {
       $stmt = $connection->prepare("SELECT room.* FROM room 
-      LEFT JOIN reservation ON room.id != reservation.room_id
-      WHERE room.type = ? AND room.suite_type = ?
+      LEFT JOIN reservation ON room.id = reservation.room_id
+      WHERE room.type = ? AND room.suite_type = ?  AND reservation.room_id IS NULL
       ");
 
       $stmt->bind_param('ss', $room_type, $suite_type);
@@ -157,5 +157,21 @@
 
     $stmt->close();
     return $result;
+  }
+
+  // reservations update section:
+  public function reservationData(){
+    $object = new Database;
+    $connection = $object->connection();
+
+    $stmt = $connection->query("SELECT room.type, room.suite_type, reservation.id, reservation.date_debut, 
+    reservation.date_fin 
+    FROM room INNER JOIN reservation ON room.id = reservation.room_id");
+
+    if($stmt){
+      return $stmt;
+    } else {
+      return false;
+    }
   }
 }

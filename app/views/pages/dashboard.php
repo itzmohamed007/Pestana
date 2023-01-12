@@ -29,16 +29,7 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <a class="nav-link" href="acceuil.php">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="acceuil.php/#about">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="acceuil.php/#services">Services</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="acceuil.php/#contact">Contact</a>
+                <a class="navbar-brand" href="../frontOffice/logout">Log out</a>
               </li>
             </ul>
           </div>
@@ -55,7 +46,7 @@
           </div>
         </div>
     </section>
-      <!-- operating section -->
+    <!-- operating section -->
     <section class="page-section-operations">
       <!-- chambres section -->
       <div class="container mb-5">

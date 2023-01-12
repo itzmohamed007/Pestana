@@ -18,7 +18,13 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-light fixed-top" id="mainNav">
         <div class="container px-4 px-lg-5">
-          <a class="navbar-brand" href="frontOffice/authentification">sign up</a>
+          <?php
+            if(empty($_SESSION['client'])){
+              echo '<a class="navbar-brand" href="frontOffice/authentification">Sign Up</a>';
+            } else {
+              echo '<a class="navbar-brand text-dark" href="frontOffice/logout">Log Out</a>';
+            }
+          ?>
           <button
             class="navbar-toggler navbar-toggler-right"
             type="button"
@@ -137,8 +143,19 @@
         <div class="container px-4 px-lg-5">
           <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-lg-8 col-md-10 text-center">
-              <h2 class="text-center text-white">Réserver maintenant!</h2>
-              <a class="btn btn-light btn-xl px-5 py-3 fw-bold mt-5 rounded-5" href="#">S'IDENTIFIER</a>
+              <?php
+                if(empty($_SESSION['client'])){
+                  echo '
+                  <h2 class="text-center text-white">Réserver maintenant!</h2>
+                  <a class="btn btn-light btn-xl px-5 py-3 fw-bold mt-5 rounded-5" href="frontOffice/authentification">S`IDENTIFIER</a>
+                  ';
+                } else {
+                  echo '
+                  <h2 class="text-center text-white">Mon espace!</h2>
+                  <a class="btn btn-light btn-xl px-5 py-3 fw-bold mt-5 rounded-5" href="frontOffice/clientSpace">Gérez vos résérvations</a>
+                  ';
+                }
+              ?>
             </div>
           </div>
         </div>

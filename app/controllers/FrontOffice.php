@@ -4,7 +4,15 @@
     public function home(){
       $this->view('pages/home');
     }
-    
+
+    // client space
+    public function clientSpace(){
+      $object = $this->model('chambre');
+      $rooms = $object->reservationData();
+
+      $this->view('pages/clientSpace', $rooms);
+    }
+
     // FORMS pages
     public function authentification(){
       $this->view('forms/authentification');
@@ -50,7 +58,11 @@
       }
     }
 
-    
+    public function logout(){
+      session_destroy();
+      header("location: ../");
+    }
+
     // public function reservation($querry){
     public function reservation(){
       // checking is the client is loged in
@@ -90,16 +102,17 @@
     }
 
     public function guests($id){
-      // part 1: send the previous reservation data to the specified table in the database
-      $date_de = $_SESSION['data']['date_debut'];
-      $date_a = $_SESSION['data']['date_fin'];
-      $clientId = $_SESSION['client'];
-
-      $object = $this->model('Chambre');
-      $object->booking($id, $date_de, $date_a, $clientId);
-
-      // part 2: getting the guests data from the dynamique form
       if(isset($_POST['reserve'])){
+        // part 1: send the previous reservation data to the specified table in the database
+        $date_de = $_SESSION['data']['date_debut'];
+        $date_a = $_SESSION['data']['date_fin'];
+        $clientId = $_SESSION['client'];
+
+        $object = $this->model('Chambre');
+        $object->booking($id, $date_de, $date_a, $clientId);
+      
+
+        // part 2: getting the guests data from the dynamique form
         $count = $_POST['count'];
 
         $nom = [];

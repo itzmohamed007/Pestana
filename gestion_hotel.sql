@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 10 jan. 2023 à 17:37
+-- Généré le : jeu. 12 jan. 2023 à 18:55
 -- Version du serveur : 10.4.25-MariaDB
 -- Version de PHP : 8.1.10
 
@@ -59,7 +59,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `name`, `email`, `password`, `phone`) VALUES
-(10, 'mohamed bourra', 'mohamedbourra@gmail.com', '$2y$10$NIx0eN.CDLVfio5K2nvD1uSguTlBKVDS4p7AyL6cZGfgErIBe1ynS', '0625265046');
+(11, 'mohamed bourra', 'mohamedbourra@gmail.com', '$2y$10$XP0A2lyMsiHUzP0W22r9/.xb6PZEesCrcFNoK/gKXuCm5nFbeQf4a', '0625265046');
 
 -- --------------------------------------------------------
 
@@ -75,6 +75,14 @@ CREATE TABLE `guest` (
   `birthday` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `guest`
+--
+
+INSERT INTO `guest` (`id`, `id_reservation`, `first_name`, `last_name`, `birthday`) VALUES
+(22, 83, 'mohamed', 'bourra', '2004-07-30'),
+(23, 84, 'mohamed', 'bourra', '2023-01-12');
+
 -- --------------------------------------------------------
 
 --
@@ -88,6 +96,14 @@ CREATE TABLE `reservation` (
   `date_fin` date NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `reservation`
+--
+
+INSERT INTO `reservation` (`id`, `room_id`, `date_debut`, `date_fin`, `id_user`) VALUES
+(83, 27, '2023-01-12', '2023-01-14', 11),
+(84, 31, '2023-01-12', '2023-01-14', 11);
 
 -- --------------------------------------------------------
 
@@ -108,9 +124,15 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`id`, `type`, `suite_type`, `numero`, `image`) VALUES
-(1, 'single', NULL, 1, 'added_imgs/chambre1.jpg'),
-(2, 'double', NULL, 2, 'added_imgs/chambre2.jpg'),
-(3, 'suite', 'Standard', 3, 'added_imgs/chambre3.jpg');
+(27, 'single', NULL, 1, 'added_imgs/chambre1.jpg'),
+(28, 'single', NULL, 2, 'added_imgs/chambre2.jpg'),
+(29, 'double', NULL, 3, 'added_imgs/chambre3.jpg'),
+(30, 'double', NULL, 4, 'added_imgs/chambre4.jpg'),
+(31, 'suite', 'Standard', 5, 'added_imgs/chambre5.jpg'),
+(32, 'suite', 'Junior', 6, 'added_imgs/chambre6.jpg'),
+(33, 'suite', 'Presidential', 7, 'added_imgs/chambre7.jpg'),
+(34, 'suite', 'Penthouse', 8, 'added_imgs/chambre8.jpg'),
+(35, 'suite', 'Honeymoon', 9, 'added_imgs/chambre9.jpg');
 
 --
 -- Index pour les tables déchargées
@@ -140,8 +162,8 @@ ALTER TABLE `guest`
 --
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`),
-  ADD KEY `reservation_ibfk_1` (`room_id`);
+  ADD KEY `reservation_ibfk_1` (`room_id`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Index pour la table `room`
@@ -163,35 +185,42 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `guest`
 --
 ALTER TABLE `guest`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT pour la table `room`
 --
 ALTER TABLE `room`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
+-- Contraintes pour la table `guest`
+--
+ALTER TABLE `guest`
+  ADD CONSTRAINT `guest_ibfk_1` FOREIGN KEY (`id_reservation`) REFERENCES `reservation` (`id`) ON DELETE CASCADE;
+
+--
 -- Contraintes pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `room` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `room` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `client` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
