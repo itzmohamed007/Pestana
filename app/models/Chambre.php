@@ -127,5 +127,35 @@
     } else {
       return false;
     }
-  }  
+  }
+  
+  
+  // this function will select for me the latest reservation so that i can get the id of the current one
+  public function latestReservation(){
+    $object = new Database;
+    $connection = $object->connection();
+
+    $stmt = $connection->prepare("SELECT `id` FROM `reservation` ORDER by id DESC LIMIT 1");
+    // this LIMIT 1 part will limit the return number of data to one row
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $stmt->close();
+
+    return $row['id'];
+  }
+
+  public function addGuests($reservationId, $count, $nom, $prenom, $naissance){
+    $object = new Database;
+    $connection = $object->connection();
+
+    $stmt = $connection->prepare("INSERT INTO guest(id_reservation, first_name, last_name, birthday) VALUES ( ?, ?, ?, ?)");
+    for($i = 0; $i < $count; $i++){
+      $stmt->bind_param('isss', $reservationId, $prenom[$i + 1], $nom[$i + 1], $naissance[$i + 1]);
+      $result = $stmt->execute();
+    }
+
+    $stmt->close();
+    return $result;
+  }
 }

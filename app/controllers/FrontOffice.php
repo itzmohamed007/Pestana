@@ -66,7 +66,6 @@
       // step 1: getting reservation informations
       $date_de = $_POST['date_de'];
       $date_a = $_POST['date_a'];
-      // $client_id = $_SESSION["client"];
 
       // putting reservation data into session
       $reservationData = [
@@ -75,39 +74,54 @@
       ];
 
       $_SESSION['data'] = $reservationData;
-
-      $object = $this->model('Chambre');
-      // $querry = $object->booking($date_de, $date_a, $client_id);
-
-      // if(!$querry){
-      //   die('reservation data error');
-      // }
-
+      
       // step 2: displaying rooms
       $room_type = $_POST['room_type'];
       $suite_type = 'null';
-
+      
       if(isset($_POST['suite_type'])){
         $suite_type = $_POST['suite_type'];
       }
-
+      
+      $object = $this->model('Chambre');
       $rows = $object->roomsSearch($room_type, $suite_type);
-
-      if($rows == false){
-        echo "rooms data error";
-      }
 
       $this->view('pages/rooms', $rows);
     }
 
     public function guests($id){
+      // part 1: send the previous reservation data to the specified table in the database
       $date_de = $_SESSION['data']['date_debut'];
       $date_a = $_SESSION['data']['date_fin'];
       $clientId = $_SESSION['client'];
 
       $object = $this->model('Chambre');
-      $result = $object->booking($id, $date_de, $date_a, $clientId);
+      $object->booking($id, $date_de, $date_a, $clientId);
 
+      // part 2: getting the guests data from the dynamique form
+      if(isset($_POST['reserve'])){
+        $count = $_POST['count'];
+
+        $nom = [];
+        $prenom = [];
+        $naissance = [];
+
+        for($i = 1; $i <= $count; $i++){
+          $nom[$i] = $_POST["nom$i"];
+          $prenom[$i] = $_POST["prenom$i"];
+          $naissance[$i] = $_POST["naissance$i"];
+        }
+
+        $reservationId = $object->latestReservation();
+
+        $result = $object->addGuests($reservationId, $count, $nom, $prenom, $naissance);
+
+        if(!$result){
+          die('eroor ya rbi salama');
+        } else {
+        header('location: ../../');
+        }
+      }
       $this->view('forms/guests');
     }
 

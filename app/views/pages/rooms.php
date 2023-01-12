@@ -21,13 +21,23 @@
             </div>
             <div class="row">
                 <?php
-                    foreach($rooms as $row){
+                    if($rooms == false){
+                    echo $rooms;
                         echo '
                         <div class="col-lg-4 col-md-6 col-sm-12 pb-5">
-                            <img class="rounded" src="../' . $row['image'] . '" alt="image d`une chambre du hotel Pestana" width="356px" height="250px">
-                            <a href="guests/' . $row['id'] . '"><button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button></a>
+                            <p>There are no rooms avaible a the moment</p>
+                            <a href="acceuil"><button class="cancel btn text-white w-100 mt-3 rounded btn-xl" type="submit">cancel</button></a>
                         </div>
                         ';
+                    } else {
+                        foreach($rooms as $row){
+                            echo '
+                            <div class="col-lg-4 col-md-6 col-sm-12 pb-5">
+                                <img class="rounded" src="../' . $row['image'] . '" alt="image d`une chambre du hotel Pestana" width="356px" height="250px">
+                                <a href="guests/' . $row['id'] . '"><button class="book btn text-white w-100 mt-3 rounded btn-xl" type="submit">book</button></a>
+                            </div>
+                            ';  
+                        } 
                     }
                 ?>
             </div>
