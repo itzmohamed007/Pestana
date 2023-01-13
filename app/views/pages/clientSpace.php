@@ -72,53 +72,49 @@
                             </tr>
                         </thead>
                         <?php
-                            if($rooms == false){
-                                echo 'vous n`avez pas de reservations pour le moment';
-                            } else {
-                                $number = 1;
-                                foreach($rooms as $rows){
-                                    if(empty($rows['suite_type'])){
-                                        $rows['suite_type'] = "null";
-                                      }
-                                    echo '
-                                        <tbody>
-                                            <tr class="border-bottom">
-                                                <td>
-                                                    <div class="p-2">
-                                                        <span>' . $rows['id'] . '</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="p-2">
-                                                        <span>' . $rows['type'] . '</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="p-2">
-                                                        <span class="d-block">' . $rows['suite_type'] . '</span>  
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="p-2">
-                                                        <span class="d-block">' . $rows['date_debut'] . '</span>  
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="p-2">
-                                                        <span class="d-block">' . $rows['date_fin'] . '</span>  
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="p-2 icons d-flex justify-content-center gap-5">
-                                                        <a href="#"><i class="fa fa-pen-to-square fa-2x"></i></a>
-                                                        <a href="#"><i class="fa fa-trash fa-2x"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        ';
-                                        $number++;
-                                    }
+                            $number = 1;
+                            foreach($rooms as $rows){
+                                if(empty($rows['suite_type'])){
+                                    $rows['suite_type'] = "null";
+                                }
+                                echo '
+                                    <tbody>
+                                        <tr class="border-bottom">
+                                            <td>
+                                                <div class="p-2">
+                                                    <span>' . $rows['id'] . '</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="p-2">
+                                                    <span>' . $rows['type'] . '</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="p-2">
+                                                    <span class="d-block">' . $rows['suite_type'] . '</span>  
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="p-2">
+                                                    <span class="d-block">' . $rows['date_debut'] . '</span>  
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="p-2">
+                                                    <span class="d-block">' . $rows['date_fin'] . '</span>  
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="p-2 icons d-flex justify-content-center gap-5">
+                                                    <a href="confirmation/' . $rows['id'] . '"><i class="fa fa-pen-to-square fa-2x"></i></a>
+                                                    <a href="deleteReservation/' . $rows['id'] . '"><i class="fa fa-trash fa-2x"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    ';
+                                    $number++;
                                 }
                         ?>
                     </table>

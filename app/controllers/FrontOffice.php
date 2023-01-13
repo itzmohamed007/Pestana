@@ -10,7 +10,68 @@
       $object = $this->model('chambre');
       $rooms = $object->reservationData();
 
-      $this->view('pages/clientSpace', $rooms);
+      if(mysqli_num_rows($rooms) > 0){
+        $this->view('pages/clientSpace', $rooms);
+      } else {
+        header('location: reservation');
+      }
+    }
+
+    // confirmation du type de modification
+    public function Confirmation($idReservation){
+      // putting reservation id into sesstion:
+      $_SESSION['idReservation'] = $idReservation;
+
+      $this->view('forms/confirmation');
+    }
+
+    // updating date page
+    public function modificationDate(){
+      if(isset($_POST['modify'])){
+        $reservationId = $_SESSION['idReservation'];
+
+        // putting new dates into variables
+        $dateDebut = $_POST['dateDebut'];
+        $dateFin = $_POST['dateFin'];
+
+        // calling update function
+        $object = $this->model('Chambre');
+        $result = $object->modificationDate($dateDebut, $dateFin, $reservationId);
+
+        if($result) {
+          header('location: clientSpace');
+        } else {
+          die('modification failed');
+        }
+      }
+
+      $this->view('forms/modificationDate');
+    }
+
+    // updating full reservation
+    public function modificationTotal(){
+      $object = $this->model('Chambre');
+      // deleting the previous reservation
+      $idReservation = $_SESSION['idReservation'];
+      $result = $object->deleteReservation($idReservation);
+
+      if($result){
+        header('location: reservation');
+      } else {
+        die('process failed');
+      }
+    }
+
+    // deleting reservation
+    public function deleteReservation($reservationId){
+      $object = $this->model('Chambre');
+      $result = $object->deleteReservation($reservationId);
+
+      if($result){
+        header('location: ../../');
+      } else {
+        die('operation failed');
+      }
     }
 
     // FORMS pages
@@ -90,7 +151,9 @@
       // step 2: displaying rooms
       $room_type = $_POST['room_type'];
       $suite_type = 'null';
-      
+
+      $_SESSION['room'] = $room_type;
+
       if(isset($_POST['suite_type'])){
         $suite_type = $_POST['suite_type'];
       }
@@ -110,7 +173,6 @@
 
         $object = $this->model('Chambre');
         $object->booking($id, $date_de, $date_a, $clientId);
-      
 
         // part 2: getting the guests data from the dynamique form
         $count = $_POST['count'];
@@ -136,12 +198,5 @@
         }
       }
       $this->view('forms/guests');
-    }
-
-    public function creation(){
-      $this->view('forms/create');
-    }
-    public function modification(){
-      $this->view('forms/modification');
     }
   }

@@ -76,6 +76,10 @@ header .btn-primary:hover {
   background-color: #ffffff;
   color: lavender;
 }
+.page-section-confirmation {
+  padding: 8rem 0;
+  background-color: #ffffff;
+}
 .page-section-chambres .container .row {
   gap: 0;
 }
@@ -88,11 +92,27 @@ header .btn-primary:hover {
 .return {
   color: #fff;
   background-color: hwb(121 5% 54%);
-  padding: 1.25rem 2.25rem;
+  padding: 1.10rem 2.25rem;
 }
 .return a {
     color: inherit !important;
     text-decoration: none !important;
+}
+.confirm {
+  color: #fff;
+  border: none;
+  background-color: red;
+  padding: 1.10rem 2.25rem;
+  font-size: 1rem;
+} 
+.confirm:hover {
+  background-color: rgb(185, 1, 1);
+  transition: .5s;
+  color: white;
+}
+.confirm a{
+  color: inherit !important;
+  text-decoration: none !important;
 }
 .return:hover {
   background-color: hwb(121 3% 65%);

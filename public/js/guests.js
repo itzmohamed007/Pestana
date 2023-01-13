@@ -1,4 +1,3 @@
-// friends data
 var number = document.getElementById("nombre");
 var fields = document.getElementById("donnee-amis");
 

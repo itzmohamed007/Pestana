@@ -2,7 +2,7 @@
   /*
     * Chambre class 
     * Contains all crud operations 
-    */
+  */
 
   class Chambre {  
   // adding room
@@ -168,10 +168,31 @@
     reservation.date_fin 
     FROM room INNER JOIN reservation ON room.id = reservation.room_id");
 
-    if($stmt){
-      return $stmt;
-    } else {
-      return false;
-    }
+    return $stmt;
+  }
+
+  // modifying the dates only
+  public function modificationDate($dateDebut, $dateFin, $id){
+    $object = new Database;
+    $connection = $object->connection();
+
+    $stmt = $connection->prepare("UPDATE reservation SET date_debut = ?, date_fin = ? WHERE id = ?");
+    $stmt->bind_param('ssi', $dateDebut, $dateFin, $id);
+    $result = $stmt->execute();
+
+    return $result;
+  }
+
+  // deleting reservation and guests
+  public function deleteReservation($idReservation){
+    $object = new Database;
+    $connection = $object->connection();
+
+    $stmt = $connection->prepare("DELETE FROM reservation WHERE id = ?");
+    $stmt->bind_param('i', $idReservation);
+    $result = $stmt->execute();
+    $stmt->close();
+
+    return $result;
   }
 }
