@@ -1,11 +1,22 @@
 var number = document.getElementById("nombre");
 var fields = document.getElementById("donnee-amis");
+var roomType = document.getElementById("room").value;
+
+var max;
 
 number.addEventListener('input', function() {
     if (number.value !== "") {
         fields.innerHTML = "";
-        let i = 1;
-        while(i <= number.value){
+
+        max = number.value
+        if(roomType == 'single'){
+            max = 1;
+        } else if(roomType == 'double'){
+            max = 2;
+        }
+
+        for(let i = 1; i <= max; i++){
+        console.log(max);
         fields.innerHTML +=
         `
         <p class="text-white text-start">guest n°: ${i}</p>
@@ -25,7 +36,6 @@ number.addEventListener('input', function() {
         </div>
         <hr class="divider-light">
         `
-        i++
         } 
     } else {
         fields.innerHTML = "";

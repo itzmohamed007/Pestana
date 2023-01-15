@@ -1,2 +1,3 @@
 # Pestana
-xi smya
+## All what you need to organize and satisfy your customers!
+### Our web site provides you with a full control to your management system so that you can organize more effectively your hotel, in terms of rooms organization, date reservation etc...

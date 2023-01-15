@@ -197,6 +197,9 @@
         header('location: ../../');
         }
       }
-      $this->view('forms/guests');
+
+      // i'm passing this variable to the guests form so that i can controle the count of guess based on the room type
+      $rooms = $_SESSION['room'];
+      $this->view('forms/guests', $rooms);
     }
   }
