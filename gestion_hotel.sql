@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 12 jan. 2023 à 18:55
+-- Généré le : ven. 27 jan. 2023 à 21:39
 -- Version du serveur : 10.4.25-MariaDB
 -- Version de PHP : 8.1.10
 
@@ -75,14 +75,6 @@ CREATE TABLE `guest` (
   `birthday` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Déchargement des données de la table `guest`
---
-
-INSERT INTO `guest` (`id`, `id_reservation`, `first_name`, `last_name`, `birthday`) VALUES
-(22, 83, 'mohamed', 'bourra', '2004-07-30'),
-(23, 84, 'mohamed', 'bourra', '2023-01-12');
-
 -- --------------------------------------------------------
 
 --
@@ -102,8 +94,7 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`id`, `room_id`, `date_debut`, `date_fin`, `id_user`) VALUES
-(83, 27, '2023-01-12', '2023-01-14', 11),
-(84, 31, '2023-01-12', '2023-01-14', 11);
+(97, 27, '2023-01-27', '2023-01-31', 11);
 
 -- --------------------------------------------------------
 
@@ -191,13 +182,13 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT pour la table `guest`
 --
 ALTER TABLE `guest`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT pour la table `room`

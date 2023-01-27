@@ -188,7 +188,6 @@ hr.divider-light  {
 /* rooms style */
 .book {
   background-color: rgb(197, 124, 124);
-  width: 356px;
 }
 .book:hover {
   background-color: rgb(163, 96, 96);

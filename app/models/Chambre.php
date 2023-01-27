@@ -92,30 +92,44 @@
   }
 
   // search functions
-  public function roomsSearch($room_type, $suite_type,){
+  public function roomsSearch($room_type, $suite_type, $date_debut, $date_fin){
     $object = new Database;
     $connection = $object->connection();
 
     if($suite_type == 'null'){
-      $stmt = $connection->prepare("SELECT room.* FROM room 
-      LEFT JOIN reservation ON room.id = reservation.room_id
-      WHERE room.type = ? AND room.suite_type IS NULL AND reservation.room_id IS NULL
+      $stmt = $connection->prepare("SELECT room.* FROM room
+      WHERE room.type = ? AND room.suite_type IS NULL
+      AND room.id NOT IN (
+          SELECT room_id FROM reservation 
+          WHERE (
+              (? BETWEEN date_debut AND date_fin) 
+              OR (? BETWEEN date_debut AND date_fin)
+              OR (date_debut BETWEEN ? AND ?)
+          )
+      )
       ");
 
-      $stmt->bind_param('s', $room_type);
+      $stmt->bind_param('sssss', $room_type, $date_debut, $date_fin, $date_debut, $date_fin);
       $stmt->execute();
       $result = $stmt->get_result();
       $rows = $result->fetch_all(MYSQLI_ASSOC); 
       // MYSQLI_ASSOC constant is used to make the functin fetch_all return an assossiative 
-      // array, it we do not include that constant, it will make the array return a normale array index with numbers
+      // array, if we do not include that constant, it will make the array return a normale array index with numbers
       $stmt->close();
     } else {
-      $stmt = $connection->prepare("SELECT room.* FROM room 
-      LEFT JOIN reservation ON room.id = reservation.room_id
-      WHERE room.type = ? AND room.suite_type = ?  AND reservation.room_id IS NULL
+      $stmt = $connection->prepare("SELECT room.* FROM room
+      WHERE room.type = ? AND room.suite_type = ?
+      AND room.id NOT IN (
+          SELECT room_id FROM reservation 
+          WHERE (
+              (? BETWEEN date_debut AND date_fin) 
+              OR (? BETWEEN date_debut AND date_fin)
+              OR (date_debut BETWEEN ? AND ?)
+          )
+      )
       ");
 
-      $stmt->bind_param('ss', $room_type, $suite_type);
+      $stmt->bind_param('ssssss', $room_type, $suite_type, $date_debut, $date_fin, $date_debut, $date_fin);
       $stmt->execute();
       $result = $stmt->get_result();
       $rows = $result->fetch_all(MYSQLI_ASSOC);
@@ -140,7 +154,7 @@
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-    $stmt->close();
+    $stmt->close(); 
 
     return $row['id'];
   }

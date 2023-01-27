@@ -30,8 +30,6 @@
                         <div class="d-grid">
                             <button class="btn py-3 btn-danger rounded-5 btn-xl" type="submit" name="reserve">Reserver</button>
                         </div>
-                        <!-- this hidden input contain the value of the room type -->
-                        <input type="hidden" value="<?php echo $rooms?>" id="room">
                     </div>
                 </form>
             </div>

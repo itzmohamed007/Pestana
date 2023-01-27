@@ -19,7 +19,6 @@
         // Unset 0 Index
         unset($url[0]);
       }
-
       // Require the controller
       require_once '../app/controllers/'. $this->currentController . '.php';
 

@@ -159,7 +159,7 @@
       }
       
       $object = $this->model('Chambre');
-      $rows = $object->roomsSearch($room_type, $suite_type);
+      $rows = $object->roomsSearch($room_type, $suite_type, $date_de, $date_a);
 
       $this->view('pages/rooms', $rows);
     }
@@ -197,9 +197,6 @@
         header('location: ../../');
         }
       }
-
-      // i'm passing this variable to the guests form so that i can controle the count of guess based on the room type
-      $rooms = $_SESSION['room'];
-      $this->view('forms/guests', $rooms);
+      $this->view('forms/guests');
     }
   }
